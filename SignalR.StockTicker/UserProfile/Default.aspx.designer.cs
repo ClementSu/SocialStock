@@ -147,13 +147,40 @@ public partial class UserProfile {
     protected global::System.Web.UI.HtmlControls.HtmlInputText txtSymbol;
     
     /// <summary>
-    /// Button1 control.
+    /// Button2 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Button Button1;
+    protected global::System.Web.UI.WebControls.Button Button2;
+    
+    /// <summary>
+    /// stockamount control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox stockamount;
+    
+    /// <summary>
+    /// buybut control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button buybut;
+    
+    /// <summary>
+    /// sellbut control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button sellbut;
     
     /// <summary>
     /// divService control.

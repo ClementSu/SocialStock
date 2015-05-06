@@ -221,26 +221,42 @@
                 <asp:Parameter Name="Memo" />
             </UpdateParameters>
         </asp:SqlDataSource>
-        <div>
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr valign="top">                                            
-                <td style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #000; text-decoration: none;">
+        <table class="auto-style1">
+            <tr>
+                <td class="auto-style2">
+                   <h4>Ticker:</h4>
                     <input type="text" value="" id="txtSymbol" runat="server" onkeypress="return CheckEnter(event);" />
                   
-                    <asp:Button ID="Button1" runat="server" Text="Get Quotes" OnClick="SendRequest" />
+                    <asp:Button ID="Button2" runat="server" Text="Get Quote" OnClick="SendRequest" />
+                    <asp:Label ID="quotelabel" runat="server" ForeColor="Red"></asp:Label>
                     <br />
                     <span style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;	color: #666;">
                         e.g. "YHOO or YHOO GOOG"
-                    </span>
+                    </span>                        
+                    <h4>Buy/Sell</h4>
+                <asp:TextBox ID="stockamount" runat="server"></asp:TextBox>
+                &nbsp;&nbsp;
+                    <asp:DropDownList ID="buyOrSell" runat="server">
+                        <asp:ListItem>Buy</asp:ListItem>
+                        <asp:ListItem>Sell</asp:ListItem>
+                    </asp:DropDownList>
+                    <asp:Button ID="confirmTransaction" runat="server" OnClick="confirmTransaction_Click" Text="Submit" />
+                    <br />
+                    <asp:Label ID="amountlabel" runat="server" ForeColor="Red"></asp:Label>
+                    <br />
+                    <br />
+                </td>
+                <td>
                     <%if (m_symbol != "") {%>                        
                         <div id="divService" runat="server">
                         <!-- Main DIV: this DIV contains contains text and DIVs that displays stock quotes and chart. -->
                         </div>
-                    <%}%>                                                                                            
-                </td>    
+                    <%}%>    
+
+                </td>
             </tr>
-        </table>    
-    </div>
+        </table>
+        <br />
         <asp:Panel ID="Panel2" runat="server">
             <asp:DataList ID="DataList2" runat="server" BackColor="#FFCCCC" DataKeyField="Id" DataSourceID="SqlDataSource4" Font-Bold="False" Font-Italic="False" Font-Names="Trebuchet MS" Font-Overline="False" Font-Size="Medium" Font-Strikeout="False" Font-Underline="False" style="margin-top: 0px; font-weight: 700;" Width="800px" BorderColor="#FF9966" BorderWidth="3px" CellPadding="20" CellSpacing="5" OnCancelCommand="DataList2_CancelCommand" OnEditCommand="DataList2_EditCommand" OnUpdateCommand="DataList2_UpdateCommand" HorizontalAlign="Center">
                 <EditItemTemplate>
@@ -271,4 +287,9 @@
     
         </asp:Content>
 <asp:Content ID="Content2" runat="server" contentplaceholderid="head">
+    <style type="text/css">
+        .auto-style2 {
+            width: 274px;
+        }
+    </style>
     </asp:Content>
