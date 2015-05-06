@@ -1,0 +1,38 @@
+﻿body{
+    background-color: lightcyan;
+}
+.nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: auto;
+    background-color: darksalmon;
+    text-align: center;
+}
+
+li {
+    float: left;
+}
+
+.top:link, .top:visited {
+    display: block;
+    width: inherit;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: darksalmon;
+    text-align: center;
+    padding: 4px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.top:hover, .top:active {
+    background-color: #7A991A;
+    width: inherit;
+    text-align: center;
+}
+
+#navbar{
+    background-color: darksalmon;
+}

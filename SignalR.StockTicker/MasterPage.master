@@ -1,0 +1,49 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" Inherits="MasterPage" Codebehind="MasterPage.master.cs" %>
+
+<!DOCTYPE html>
+
+
+<link href="/StyleSheet.css" rel="stylesheet" type="text/css" />
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>StockView</title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .auto-style1 {
+            width: 100%;
+        }
+        </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+
+        <div>
+            <table class="auto-style1"id="navbar">
+                <tr >
+                    <td class="nav">
+                        <asp:HyperLink ID="homeHyperlink" runat="server" CssClass="top" NavigateUrl="~/Login.aspx">Login</asp:HyperLink>
+                    </td>
+                    <td class="nav"><a class="top">
+                        <asp:LinkButton ID="searchButton" runat="server" CssClass="top" OnClick="searchButton_Click">Search</asp:LinkButton>
+                        </a></td>
+                    <td class="nav">
+                        <asp:LinkButton ID="settingsbut" runat="server" CssClass="top" OnClick="settingsbut_Click">Settings</asp:LinkButton>
+                    </td>
+                    <td class="nav">
+                        <asp:HyperLink ID="adminHyperlink" runat="server" CssClass="top" Visible="False" NavigateUrl="~/Admin/Default.aspx">Administration</asp:HyperLink>
+                    </td>
+                    <td>
+                        <asp:LinkButton ID="logoutLink" runat="server" CssClass="top" OnClick="logoutLinnk_Click">logout</asp:LinkButton>
+                    </td>
+                </tr>
+            </table>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    
+    </form>
+</body>
+</html>
