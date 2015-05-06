@@ -221,6 +221,25 @@
                 <asp:Parameter Name="Memo" />
             </UpdateParameters>
         </asp:SqlDataSource>
+            <asp:DataList ID="DataList2" runat="server" BackColor="#FFCCCC" DataKeyField="Id" DataSourceID="SqlDataSource4" Font-Bold="False" Font-Italic="False" Font-Names="Trebuchet MS" Font-Overline="False" Font-Size="Medium" Font-Strikeout="False" Font-Underline="False" style="margin-top: 0px; font-weight: 700;" Width="800px" BorderColor="#FF9966" BorderWidth="3px" CellPadding="20" CellSpacing="5" OnCancelCommand="DataList2_CancelCommand" OnEditCommand="DataList2_EditCommand" OnUpdateCommand="DataList2_UpdateCommand" HorizontalAlign="Center">
+                <EditItemTemplate>
+                    <asp:ImageButton ID="ImageButton2" runat="server" ImageAlign="Right" ImageUrl="~/img/cancel.png" CommandName="cancel"  />
+                    <asp:ImageButton ID="ImageButton3" runat="server" ImageAlign="Right" ImageUrl="~/img/check.png" CommandName="update" />
+                    Edit Memo Entries:<br />
+                    <br />
+                    <asp:TextBox ID="memobox" runat="server" Height="355px" Text='<%# Eval("Memo") %>' TextMode="MultiLine" Width="570px"></asp:TextBox>
+                    <br />
+                    <br />
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:ImageButton ID="ImageButton1" visible='<%# FunctionToCheckPermissionsWhichReturnsTrueOrFalse() %>' runat="server" ImageAlign="Right" ImageUrl="~/img/edit.png" CommandName="edit" />
+                    Memo Pad<br />&nbsp;<br />&nbsp;<asp:Label ID="MemoLabel" runat="server" Text='<%# Eval("Memo") %>' style="font-weight: 700" />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                </ItemTemplate>
+            </asp:DataList>
         <table class="auto-style1">
             <tr>
                 <td class="auto-style2">
@@ -258,25 +277,6 @@
         </table>
         <br />
         <asp:Panel ID="Panel2" runat="server">
-            <asp:DataList ID="DataList2" runat="server" BackColor="#FFCCCC" DataKeyField="Id" DataSourceID="SqlDataSource4" Font-Bold="False" Font-Italic="False" Font-Names="Trebuchet MS" Font-Overline="False" Font-Size="Medium" Font-Strikeout="False" Font-Underline="False" style="margin-top: 0px; font-weight: 700;" Width="800px" BorderColor="#FF9966" BorderWidth="3px" CellPadding="20" CellSpacing="5" OnCancelCommand="DataList2_CancelCommand" OnEditCommand="DataList2_EditCommand" OnUpdateCommand="DataList2_UpdateCommand" HorizontalAlign="Center">
-                <EditItemTemplate>
-                    <asp:ImageButton ID="ImageButton2" runat="server" ImageAlign="Right" ImageUrl="~/img/cancel.png" CommandName="cancel"  />
-                    <asp:ImageButton ID="ImageButton3" runat="server" ImageAlign="Right" ImageUrl="~/img/check.png" CommandName="update" />
-                    Edit Memo Entries:<br />
-                    <br />
-                    <asp:TextBox ID="memobox" runat="server" Height="355px" Text='<%# Eval("Memo") %>' TextMode="MultiLine" Width="570px"></asp:TextBox>
-                    <br />
-                    <br />
-                </EditItemTemplate>
-                <ItemTemplate>
-                    <asp:ImageButton ID="ImageButton1" visible='<%# FunctionToCheckPermissionsWhichReturnsTrueOrFalse() %>' runat="server" ImageAlign="Right" ImageUrl="~/img/edit.png" CommandName="edit" />
-                    Memo Pad<br />&nbsp;<br />&nbsp;<asp:Label ID="MemoLabel" runat="server" Text='<%# Eval("Memo") %>' style="font-weight: 700" />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                </ItemTemplate>
-            </asp:DataList>
         </asp:Panel>
         <br />
         <br />

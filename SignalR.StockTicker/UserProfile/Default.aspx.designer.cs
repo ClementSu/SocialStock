@@ -138,6 +138,15 @@ public partial class UserProfile {
     protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource4;
     
     /// <summary>
+    /// DataList2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.DataList DataList2;
+    
+    /// <summary>
     /// txtSymbol control.
     /// </summary>
     /// <remarks>
@@ -156,6 +165,15 @@ public partial class UserProfile {
     protected global::System.Web.UI.WebControls.Button Button2;
     
     /// <summary>
+    /// quotelabel control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label quotelabel;
+    
+    /// <summary>
     /// stockamount control.
     /// </summary>
     /// <remarks>
@@ -165,22 +183,31 @@ public partial class UserProfile {
     protected global::System.Web.UI.WebControls.TextBox stockamount;
     
     /// <summary>
-    /// buybut control.
+    /// buyOrSell control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Button buybut;
+    protected global::System.Web.UI.WebControls.DropDownList buyOrSell;
     
     /// <summary>
-    /// sellbut control.
+    /// confirmTransaction control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Button sellbut;
+    protected global::System.Web.UI.WebControls.Button confirmTransaction;
+    
+    /// <summary>
+    /// amountlabel control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label amountlabel;
     
     /// <summary>
     /// divService control.
@@ -199,13 +226,4 @@ public partial class UserProfile {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Panel Panel2;
-    
-    /// <summary>
-    /// DataList2 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.DataList DataList2;
 }

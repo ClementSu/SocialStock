@@ -17,3 +17,22 @@ c:\users\clement su\documents\visual studio 2013\Projects\SignalR.StockTicker\Si
 c:\users\clement su\documents\visual studio 2013\Projects\SignalR.StockTicker\SignalR.StockTicker\bin\Microsoft.Owin.Host.SystemWeb.xml
 c:\users\clement su\documents\visual studio 2013\Projects\SignalR.StockTicker\SignalR.StockTicker\bin\Microsoft.Owin.Security.xml
 c:\users\clement su\documents\visual studio 2013\Projects\SignalR.StockTicker\SignalR.StockTicker\bin\Newtonsoft.Json.xml
+C:\Users\Oliver\Documents\GitHub\SocialStock\SignalR.StockTicker\bin\SignalR.StockTicker.dll.config
+C:\Users\Oliver\Documents\GitHub\SocialStock\SignalR.StockTicker\bin\SignalR.StockTicker.dll
+C:\Users\Oliver\Documents\GitHub\SocialStock\SignalR.StockTicker\bin\SignalR.StockTicker.pdb
+C:\Users\Oliver\Documents\GitHub\SocialStock\SignalR.StockTicker\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\Oliver\Documents\GitHub\SocialStock\SignalR.StockTicker\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Users\Oliver\Documents\GitHub\SocialStock\SignalR.StockTicker\bin\Microsoft.Owin.dll
+C:\Users\Oliver\Documents\GitHub\SocialStock\SignalR.StockTicker\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\Oliver\Documents\GitHub\SocialStock\SignalR.StockTicker\bin\Microsoft.Owin.Security.dll
+C:\Users\Oliver\Documents\GitHub\SocialStock\SignalR.StockTicker\bin\Newtonsoft.Json.dll
+C:\Users\Oliver\Documents\GitHub\SocialStock\SignalR.StockTicker\bin\Owin.dll
+C:\Users\Oliver\Documents\GitHub\SocialStock\SignalR.StockTicker\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Users\Oliver\Documents\GitHub\SocialStock\SignalR.StockTicker\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\Users\Oliver\Documents\GitHub\SocialStock\SignalR.StockTicker\bin\Microsoft.Owin.xml
+C:\Users\Oliver\Documents\GitHub\SocialStock\SignalR.StockTicker\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Oliver\Documents\GitHub\SocialStock\SignalR.StockTicker\bin\Microsoft.Owin.Security.xml
+C:\Users\Oliver\Documents\GitHub\SocialStock\SignalR.StockTicker\bin\Newtonsoft.Json.xml
+C:\Users\Oliver\Documents\GitHub\SocialStock\SignalR.StockTicker\obj\Debug\SignalR.StockTicker.csprojResolveAssemblyReference.cache
+C:\Users\Oliver\Documents\GitHub\SocialStock\SignalR.StockTicker\obj\Debug\SignalR.StockTicker.dll
+C:\Users\Oliver\Documents\GitHub\SocialStock\SignalR.StockTicker\obj\Debug\SignalR.StockTicker.pdb
