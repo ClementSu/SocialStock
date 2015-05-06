@@ -122,6 +122,7 @@
     <Content Include="StyleSheet.css" />
     <Content Include="UserProfile\Default.aspx" />
     <Content Include="UserProfile\Settings.aspx" />
+    <Content Include="UserProfile\stock.xsl" />
     <Content Include="UserProfile\View.aspx" />
     <Content Include="Web.config" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
