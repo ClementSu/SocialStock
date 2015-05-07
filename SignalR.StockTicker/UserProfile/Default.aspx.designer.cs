@@ -57,13 +57,13 @@ public partial class UserProfile {
     protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource2;
     
     /// <summary>
-    /// Panel5 control.
+    /// Panel6 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Panel Panel5;
+    protected global::System.Web.UI.WebControls.Panel Panel6;
     
     /// <summary>
     /// profImage control.
@@ -73,6 +73,15 @@ public partial class UserProfile {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Image profImage;
+    
+    /// <summary>
+    /// Panel8 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Panel Panel8;
     
     /// <summary>
     /// FileUpload1 control.

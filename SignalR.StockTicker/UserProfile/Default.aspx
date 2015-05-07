@@ -118,27 +118,19 @@
         <table class="auto-style1" border="0" style="border-spacing: 100px; ">
             <tr>
                 <td>
-                    <asp:Panel ID="Panel5" runat="server" style="text-align: right">
-                        <br />
-                        <table class="auto-style1">
-                            <tr>
-                                <td>
-                                    <asp:Image ID="profImage" runat="server" CssClass="profpic" ImageAlign="Middle" style="max-height:300px; width: auto; align-content:center; text-align: right;" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control-static" style="position: relative; left: 495px;" Visible="False" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:Button ID="uploadBut" runat="server" CssClass="btn btn-info" OnClick="Upload" Text="Upload" Visible="False" />
-                                    <asp:RegularExpressionValidator ID="uplValidator" runat="server" ControlToValidate="FileUpload1" EnableClientScript="False" ErrorMessage="Only JPEG, PNG, and GIF images are allowed" ForeColor="Red" ValidationExpression="(.+\.([Jj][Pp][Gg])|.+\.([Pp][Nn][Gg])|.+\.([Gg][Ii][Ff]))"></asp:RegularExpressionValidator>
-                                </td>
-                            </tr>
-                        </table>
+                    <Br />
+                    <asp:Panel ID="Panel6" runat="server" style="text-align: right">
+                        <asp:Image ID="profImage" runat="server" CssClass="profpic" ImageAlign="Middle" style="max-height:300px; width: auto; align-content:center; text-align: right;" />
                     </asp:Panel>
+                    <br />
+                    <asp:Panel ID="Panel8" runat="server" style="text-align: left; position: relative; left: 500px">
+                        <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control-static"  Visible="False" />
+                        <asp:Button ID="uploadBut" runat="server" CssClass="btn btn-info" OnClick="Upload" Text="Upload" Visible="False" />
+                        <asp:RegularExpressionValidator ID="uplValidator" runat="server" ControlToValidate="FileUpload1" EnableClientScript="False" ErrorMessage="Only JPEG, PNG, and GIF images are allowed" ForeColor="Red" style="text-align: right" ValidationExpression="(.+\.([Jj][Pp][Gg])|.+\.([Pp][Nn][Gg])|.+\.([Gg][Ii][Ff]))"></asp:RegularExpressionValidator>
+                        &nbsp;
+                    </asp:Panel>
+                    <br />
+                    <br />
                 </td>
                 <td>
                     <asp:DataList ID="DataList1" style="position: relative; margin-right: 17px; left: 20px" runat="server" DataSourceID="SqlDataSource3" BackColor="White" BorderColor="#337AB7" BorderWidth="3px" CellPadding="5" Font-Bold="False" Font-Italic="False" Font-Names="Trebuchet MS" Font-Overline="False" Font-Strikeout="False" Font-Underline="False" ForeColor="Black" GridLines="Both" CellSpacing="20" OnEditCommand="DataList1_EditCommand" Width="300px" OnCancelCommand="DataList1_CancelCommand" OnUpdateCommand="DataList1_UpdateCommand" >
@@ -234,6 +226,7 @@
                 <asp:Parameter Name="Memo" />
             </UpdateParameters>
         </asp:SqlDataSource>
+            <br />
             <asp:DataList ID="DataList2" runat="server" BackColor="White" DataKeyField="Id" DataSourceID="SqlDataSource4" Font-Bold="False" Font-Italic="False" Font-Names="Trebuchet MS" Font-Overline="False" Font-Size="Medium" Font-Strikeout="False" Font-Underline="False" style="margin-top: 0px; font-weight: 700;" Width="800px" BorderColor="#337AB7" BorderWidth="3px" CellPadding="20" CellSpacing="5" OnCancelCommand="DataList2_CancelCommand" OnEditCommand="DataList2_EditCommand" OnUpdateCommand="DataList2_UpdateCommand" HorizontalAlign="Center">
                 <EditItemTemplate>
                     <asp:ImageButton ID="ImageButton2" runat="server" ImageAlign="Right" ImageUrl="~/img/cancel.png" CommandName="cancel"  />
@@ -279,7 +272,6 @@
         </asp:DropDownList>
 &nbsp;
         <asp:Button ID="viewPortfolioButton" style="position:relative; left: 100px" runat="server" OnClick="viewPortfolioButton_Click" Text="View Portfolio" CssClass="btn btn-info" />
-        <br />
         <br />
         <br />
         <asp:Panel ID="Panel4" runat="server" Visible="False" HorizontalAlign="Center">
@@ -351,11 +343,6 @@
                 </tr>
             </table>
         </asp:Panel>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
         <br />
         <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:RegistrationConnectionString %>" InsertCommand="INSERT INTO Portfolios(Username, Portfolio) VALUES (@username, @portfolio)" SelectCommand="SELECT COUNT(*) AS number FROM Portfolios WHERE (Username = @username) AND (Portfolio = @portfolio)">
             <InsertParameters>
