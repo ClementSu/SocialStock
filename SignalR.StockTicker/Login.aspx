@@ -7,27 +7,11 @@
         .auto-style1 {
             width: 100%;
         }
-        .auto-style2 {
-            text-align: right;
-            width: 315px;
+        .auto-style10 {
+            width: 100%;
         }
-        .auto-style3 {
-            width: 315px;
-        }
-        .auto-style4 {
-            width: 216px;
-        }
-        .auto-style5 {
-            text-align: right;
-            width: 315px;
-            height: 26px;
-        }
-        .auto-style6 {
-            width: 216px;
-            height: 26px;
-        }
-        .auto-style7 {
-            height: 26px;
+        .auto-style11 {
+            text-align: center;
         }
     </style>
     <h1 style="text-align: center">Welcome to StockView</h1>
@@ -48,39 +32,41 @@
         <br />
         <asp:Label ID="Label1" runat="server" ForeColor="Red"></asp:Label>
     
+        <br />
+        <br />
+        <asp:Panel ID="Panel2" runat="server" style="text-align: center">
+            <table class="auto-style10">
+                <tr>
+                    <td class="auto-style11"><asp:Label ID="Label2" runat="server" Text="Username:"></asp:Label>
+                        &nbsp;<asp:TextBox ID="userName" runat="server" Width="180px"></asp:TextBox>
+                        &nbsp;<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="userName" EnableClientScript="False" ErrorMessage="Please enter a username" ForeColor="Red" ValidationGroup="loginForm"></asp:RequiredFieldValidator>
+                        <br />
+                        <br />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style11">
+                        <asp:Label ID="Label3" runat="server" Text="Password:"></asp:Label>
+&nbsp;
+                        <asp:TextBox ID="pw" runat="server" TextMode="Password" Width="180px"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="pw" EnableClientScript="False" ErrorMessage="Password is missing" ForeColor="Red" ValidationGroup="loginForm"></asp:RequiredFieldValidator>
+                        <br />
+                        <br />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style11">
+                        <asp:Button ID="Button1" runat="server" CssClass="btn btn-success" OnClick="Button1_Click" Text="Login" ValidationGroup="loginForm" Width="98px" />
+                        &nbsp;<asp:Button ID="registerbut" runat="server" CssClass="btn btn-success" OnClick="registerbut_Click" Text="Register" Width="97px" />
+                        <br />
+                        <br />
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+    
+        <br />
+        <br />
+    
     </div>
-        <table class="auto-style1">
-            <tr>
-                <td class="auto-style2">Username:</td>
-                <td class="auto-style4">
-                    <asp:TextBox ID="userName" runat="server" Width="180px"></asp:TextBox>
-                </td>
-                <td>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="userName" EnableClientScript="False" ErrorMessage="Please enter a username" ForeColor="Red" ValidationGroup="loginForm"></asp:RequiredFieldValidator>
-                </td>
-            </tr>
-            <tr>
-                <td class="auto-style5">Password:</td>
-                <td class="auto-style6">
-                    <asp:TextBox ID="pw" runat="server" TextMode="Password" Width="180px"></asp:TextBox>
-                </td>
-                <td class="auto-style7">
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="pw" EnableClientScript="False" ErrorMessage="Password is missing" ForeColor="Red" ValidationGroup="loginForm"></asp:RequiredFieldValidator>
-                </td>
-            </tr>
-            <tr>
-                <td class="auto-style3">&nbsp;</td>
-                <td class="auto-style4">&nbsp;</td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td class="auto-style3">&nbsp;</td>
-                <td class="auto-style4">
-                    <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Login" ValidationGroup="loginForm" Width="98px" CssClass="btn btn-success" />
-                </td>
-                <td>
-                    <asp:Button ID="registerbut" runat="server" OnClick="registerbut_Click" Text="Register" Width="97px" CssClass="btn btn-success" />
-                </td>
-            </tr>
-        </table>
-</asp:Content>
+        </asp:Content>

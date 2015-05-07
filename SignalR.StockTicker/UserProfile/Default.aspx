@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="UserProfile" MasterPageFile="~/MasterPage.master" Codebehind="Default.aspx.cs" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-<link href="/resource/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="/resource/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
     <script  type="text/javascript">
         /// <summary>
         /// This function will be called when user clicks the Get Quotes button.
@@ -515,7 +515,7 @@
                         <br />
                     </td>
                     <td><%if (m_symbol != "") {%>
-                        <div id="divService" runat="server">
+                        <div id="divService" runat="server" style="position: relative; left: 30px">
                             <!-- Main DIV: this DIV contains contains text and DIVs that displays stock quotes and chart. -->
                         </div>
                         <%}%></td>
@@ -580,6 +580,9 @@
         }
         .auto-style16 {
             text-align: center;
+        }
+        #divService {
+            text-align: left;
         }
         </style>
     </asp:Content>
