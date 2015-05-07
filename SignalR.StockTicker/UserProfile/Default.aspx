@@ -285,7 +285,7 @@
                         <br />
                         <span style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;	color: #666;">e.g. "YHOO or YHOO GOOG" </span>
                         <h4>Buy/Sell:</h4>
-                        &nbsp;<asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:RegistrationConnectionString %>" SelectCommand="SELECT Quantity FROM BalanceSheet WHERE (Username = @username) AND (Portfolio = @portfolio) AND (Ticker = @ticker)" InsertCommand="INSERT INTO Transactions(Username, BuySell, Quantity, Epoch, Price, Ticker, Portfolio) VALUES (@username, @buysell, @quantity, @epoch, @price, @ticker, @portfolio)">
+                        &nbsp;<asp:SqlDataSource ID="PortfolioHasStock" runat="server" ConnectionString="<%$ ConnectionStrings:RegistrationConnectionString %>" SelectCommand="SELECT Quantity FROM BalanceSheet WHERE (Username = @username) AND (Portfolio = @portfolio) AND (Ticker = @ticker)" InsertCommand="INSERT INTO Transactions(Username, BuySell, Quantity, Epoch, Price, Ticker, Portfolio) VALUES (@username, @buysell, @quantity, @epoch, @price, @ticker, @portfolio)">
                             <InsertParameters>
                                 <asp:ControlParameter ControlID="hiddenUsername" Name="username" PropertyName="Value" />
                                 <asp:ControlParameter ControlID="buyOrSell" Name="buysell" PropertyName="SelectedValue" />
@@ -306,12 +306,27 @@
                                 <asp:ControlParameter ControlID="hiddenUsername" Name="username" PropertyName="Value" />
                                 <asp:ControlParameter ControlID="buyOrSell" Name="buysell" PropertyName="SelectedValue" />
                                 <asp:ControlParameter ControlID="quantityField" Name="quantity" PropertyName="Text" Type="Int32" />
-                                <asp:Parameter Name="epoch" />
-                                <asp:Parameter Name="price" />
+                                <asp:ControlParameter ControlID="hiddenEpoch" Name="epoch" PropertyName="Value" />
+                                <asp:ControlParameter ControlID="hiddenPrice" Name="price" PropertyName="Value" />
                                 <asp:ControlParameter ControlID="tradeTicker" Name="ticker" PropertyName="Text" />
                                 <asp:ControlParameter ControlID="portfolioSelection" Name="portfolio" PropertyName="SelectedValue" />
                             </InsertParameters>
                         </asp:SqlDataSource>
+                        <asp:SqlDataSource ID="balanceSheetDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:RegistrationConnectionString %>" InsertCommand="INSERT INTO BalanceSheet(Username, Portfolio, Ticker, Quantity) VALUES (@username, @portfolio, @ticker, @quantity)" SelectCommand="SELECT * FROM [BalanceSheet]" UpdateCommand="UPDATE BalanceSheet SET Quantity = Quantity + @quantity WHERE (Username = @username) AND (Portfolio = @portfolio) AND (Ticker = @ticker)">
+                            <InsertParameters>
+                                <asp:ControlParameter ControlID="hiddenUsername" Name="username" PropertyName="Value" />
+                                <asp:ControlParameter ControlID="portfolioSelection" Name="portfolio" PropertyName="SelectedValue" />
+                                <asp:ControlParameter ControlID="tradeTicker" Name="ticker" PropertyName="Text" />
+                                <asp:ControlParameter ControlID="quantityField" Name="quantity" PropertyName="Text" />
+                            </InsertParameters>
+                            <UpdateParameters>
+                                <asp:ControlParameter ControlID="quantityField" Name="quantity" PropertyName="Text" />
+                                <asp:ControlParameter ControlID="hiddenUsername" Name="username" PropertyName="Value" />
+                                <asp:ControlParameter ControlID="portfolioSelection" Name="portfolio" PropertyName="SelectedValue" />
+                                <asp:ControlParameter ControlID="tradeTicker" Name="ticker" PropertyName="Text" />
+                            </UpdateParameters>
+                        </asp:SqlDataSource>
+                        <br />
                         <asp:HiddenField ID="hiddenEpoch" runat="server" />
                         <br />
                         <asp:HiddenField ID="hiddenPrice" runat="server" />

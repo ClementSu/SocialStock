@@ -412,8 +412,8 @@ public partial class UserProfile : System.Web.UI.Page
         hiddenEpoch.Value = DateTime.Now.ToString("yyyyMMddHHmmss");
         hiddenPrice.Value = get_price(tradeTicker.Text).ToString();
 
+        DataView dv = (DataView)PortfolioHasStock.Select(DataSourceSelectArguments.Empty);
         if (buyOrSell.SelectedValue  == "Sell") {
-            DataView dv = (DataView)SqlDataSource7.Select(DataSourceSelectArguments.Empty);
             
             
             if (dv.Table.Rows.Count == 0) {
@@ -430,13 +430,31 @@ public partial class UserProfile : System.Web.UI.Page
             return;
         }
         //execute buy code
+       
+        //store buy to transactions
         try {
-            SqlDataSource7.Insert();
+            transactionDataSource.Insert();
             amountlabel.Text = "Successfully purchased " + quantityField.Text +" shares of "
                 + tradeTicker.Text +" at " + hiddenPrice.Value +"$ per share.";
         } catch {
-            amountlabel.Text = "Failed to complete trade.";
+            amountlabel.Text = "Failed to save trade to transactions.";
         }
+
+        //store buy to balancesheet
+
+        if (dv.Table.Rows.Count == 0) {
+            //insert new row
+            balanceSheetDataSource.Insert();
+
+        } else {
+            //else add to existing quantity
+            balanceSheetDataSource.Update();
+        }
+
+        
+
+            //amountlabel.Text = "Failed to save trade to balancesheet.";
+        
         return;
     }
 

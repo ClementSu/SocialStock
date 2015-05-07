@@ -246,13 +246,13 @@ public partial class UserProfile {
     protected global::System.Web.UI.WebControls.Label quotelabel;
     
     /// <summary>
-    /// SqlDataSource7 control.
+    /// PortfolioHasStock control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource7;
+    protected global::System.Web.UI.WebControls.SqlDataSource PortfolioHasStock;
     
     /// <summary>
     /// transactionDataSource control.
@@ -262,6 +262,15 @@ public partial class UserProfile {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.SqlDataSource transactionDataSource;
+    
+    /// <summary>
+    /// balanceSheetDataSource control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.SqlDataSource balanceSheetDataSource;
     
     /// <summary>
     /// hiddenEpoch control.
