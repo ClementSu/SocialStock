@@ -404,23 +404,24 @@ public partial class UserProfile : System.Web.UI.Page
         }
 
         int quantity;
-        if(int.TryParse(quantityField.Text, out quantity)){
+        if(!(int.TryParse(quantityField.Text, out quantity))){
             amountlabel.Text = "You must enter an integer for the quantity.";
             return;
         }
 
         hiddenEpoch.Value = DateTime.Now.ToString("yyyyMMddHHmmss");
-
-        //hiddenPrice.Value = ;
+        hiddenPrice.Value = get_price(tradeTicker.Text).ToString();
 
         if (buyOrSell.SelectedValue  == "Sell") {
             DataView dv = (DataView)SqlDataSource7.Select(DataSourceSelectArguments.Empty);
-            DataRow row = dv.Table.Rows[0];
-            int dbquantity = (int)row["Quantity"];
-            if (dbquantity == null) {
+            
+            
+            if (dv.Table.Rows.Count == 0) {
                 amountlabel.Text = "Portfolio does not own this stock.";
                 return;
             }
+            DataRow row = dv.Table.Rows[0];
+            int dbquantity = (int)row["Quantity"];
             if (quantity > dbquantity) {
                 amountlabel.Text = "Entered quantity exceeds portfolio stock.";
                 return;
@@ -429,14 +430,60 @@ public partial class UserProfile : System.Web.UI.Page
             return;
         }
         //execute buy code
-
-        
+        try {
+            SqlDataSource7.Insert();
+            amountlabel.Text = "Successfully purchased " + quantityField.Text +" shares of "
+                + tradeTicker.Text +" at " + hiddenPrice.Value +"$ per share.";
+        } catch {
+            amountlabel.Text = "Failed to complete trade.";
+        }
+        return;
     }
+
+
+
     protected float get_price(string ticker) {
+        float price = -2;
+        string symbol = ticker;
+        string content = "";
+        
+        try {
+            // Use Yahoo finance service to download stock data from Yahoo
+            string yahooURL = @"http://download.finance.yahoo.com/d/quotes.csv?s=" + symbol + "&f=l1";
+            string[] symbols = symbol.Replace(",", " ").Split(' ');
 
-//        float time = DateTime.Now();
+            // Initialize a new WebRequest.
 
-        return 0;
+            HttpWebRequest webreq = (HttpWebRequest)WebRequest.Create(yahooURL);
+            // Get the response from the Internet resource.
+            HttpWebResponse webresp = (HttpWebResponse)webreq.GetResponse();
+            // Read the body of the response from the server.
+            StreamReader strm = new StreamReader(webresp.GetResponseStream(), Encoding.ASCII);
+
+            // Construct a XML in string format.
+           
+           
+                while (!(strm.EndOfStream)) {
+                    content += strm.ReadLine();
+
+                }
+               
+
+            
+                if (content == "N/A") {
+                    return -1;
+            }
+                float.TryParse(content, out price);
+            
+            // Close the StreamReader object.
+            strm.Close();
+        } catch {
+            // Handle exceptions.
+        }
+        // Return the stock quote data in XML format.
+
+        return price;
+        
     }
 
     protected void addPortfolio_Click(object sender, EventArgs e) {

@@ -285,7 +285,16 @@
                         <br />
                         <span style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;	color: #666;">e.g. "YHOO or YHOO GOOG" </span>
                         <h4>Buy/Sell:</h4>
-                        &nbsp;<asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:RegistrationConnectionString %>" SelectCommand="SELECT Quantity FROM BalanceSheet WHERE (Username = @username) AND (Portfolio = @portfolio) AND (Ticker = @ticker)">
+                        &nbsp;<asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:RegistrationConnectionString %>" SelectCommand="SELECT Quantity FROM BalanceSheet WHERE (Username = @username) AND (Portfolio = @portfolio) AND (Ticker = @ticker)" InsertCommand="INSERT INTO Transactions(Username, BuySell, Quantity, Epoch, Price, Ticker, Portfolio) VALUES (@username, @buysell, @quantity, @epoch, @price, @ticker, @portfolio)">
+                            <InsertParameters>
+                                <asp:ControlParameter ControlID="hiddenUsername" Name="username" PropertyName="Value" />
+                                <asp:ControlParameter ControlID="buyOrSell" Name="buysell" PropertyName="SelectedValue" />
+                                <asp:ControlParameter ControlID="quantityField" Name="quantity" PropertyName="Text" />
+                                <asp:ControlParameter ControlID="hiddenEpoch" Name="epoch" PropertyName="Value" />
+                                <asp:ControlParameter ControlID="hiddenPrice" Name="price" PropertyName="Value" />
+                                <asp:ControlParameter ControlID="tradeTicker" Name="ticker" PropertyName="Text" />
+                                <asp:ControlParameter ControlID="portfolioSelection" Name="portfolio" PropertyName="SelectedValue" />
+                            </InsertParameters>
                             <SelectParameters>
                                 <asp:ControlParameter ControlID="hiddenUsername" Name="username" PropertyName="Value" />
                                 <asp:ControlParameter ControlID="portfolioSelection" Name="portfolio" PropertyName="SelectedValue" />
