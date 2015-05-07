@@ -580,6 +580,8 @@ public partial class UserProfile : System.Web.UI.Page
             }
             int intGrowth = Convert.ToInt32(TotalGain);
             Growth.Text = intGrowth.ToString();
+            Panel3.Visible = true;
+            Panel4.Visible = true;
         }
         catch
         {

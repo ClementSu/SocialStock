@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="Register" MasterPageFile="~/MasterPage.master" Codebehind="Register.aspx.cs" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <link href="/resource/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
 
     <h1 style="text-align: center">Registration</h1>
     
@@ -96,7 +97,7 @@
             <tr>
                 <td class="auto-style3">&nbsp;</td>
                 <td class="auto-style4">
-                    <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Register" ValidationGroup="RegForm" />
+                    <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Register" ValidationGroup="RegForm" CssClass="btn btn-success" />
                 </td>
                 <td>&nbsp;</td>
             </tr>

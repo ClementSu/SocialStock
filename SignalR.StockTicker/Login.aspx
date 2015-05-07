@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="Login" MasterPageFile="~/MasterPage.master" Codebehind="Login.aspx.cs" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <link href="/resource/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
     
     <style type="text/css">
         .auto-style1 {
@@ -75,10 +76,10 @@
             <tr>
                 <td class="auto-style3">&nbsp;</td>
                 <td class="auto-style4">
-                    <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Login" ValidationGroup="loginForm" Width="98px" />
+                    <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Login" ValidationGroup="loginForm" Width="98px" CssClass="btn btn-success" />
                 </td>
                 <td>
-                    <asp:Button ID="registerbut" runat="server" OnClick="registerbut_Click" Text="Register" Width="97px" />
+                    <asp:Button ID="registerbut" runat="server" OnClick="registerbut_Click" Text="Register" Width="97px" CssClass="btn btn-success" />
                 </td>
             </tr>
         </table>

@@ -7,7 +7,7 @@
     padding: 0;
     overflow: hidden;
     width: auto;
-    background-color: darksalmon;
+    background-color: #337ab7;
     text-align: center;
 }
 
@@ -20,7 +20,7 @@ li {
     width: inherit;
     font-weight: bold;
     color: #FFFFFF;
-    background-color: darksalmon;
+    background-color: #337ab7;
     text-align: center;
     padding: 4px;
     text-decoration: none;
@@ -34,5 +34,5 @@ li {
 }
 
 #navbar{
-    background-color: darksalmon;
+    background-color: #337ab7;
 }

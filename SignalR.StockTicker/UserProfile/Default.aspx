@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="UserProfile" MasterPageFile="~/MasterPage.master" Codebehind="Default.aspx.cs" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<link href="/resource/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
     <script  type="text/javascript">
         /// <summary>
         /// This function will be called when user clicks the Get Quotes button.
@@ -92,7 +93,7 @@
         <asp:HiddenField ID="hiddenUsername" runat="server" />
         <asp:HiddenField ID="hiddenView" runat="server" />
         <br />
-        <h1 style="text-align:center"><asp:Label ID="Label1" runat="server"></asp:Label></h1>
+        <h1 style="text-align:center" aria-autocomplete="inline"><asp:Label ID="Label1" runat="server"></asp:Label></h1>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:RegistrationConnectionString %>" SelectCommand="SELECT Id, FirstName, LastName, Password, Username, Active, Administrator, Email, Gender, Telephone, Address, Age FROM UserInfo WHERE (Username = @userName) AND (Active = 1)" UpdateCommand="UPDATE UserInfo SET ImageUrl = @imgUrl WHERE (Username = @userName) AND (Active = 1)">
             <SelectParameters>
                 <asp:ControlParameter ControlID="hiddenUsername" Name="userName" PropertyName="Value" />
@@ -114,21 +115,33 @@
         </asp:SqlDataSource>
     
         <br />
-        <table class="auto-style1" border="0" style="border-spacing: 50px;">
+        <table class="auto-style1" border="0" style="border-spacing: 100px; ">
             <tr>
                 <td>
-                    <asp:Panel ID="Panel1" runat="server" HorizontalAlign="Right">
-                        <asp:Image ID="profImage" runat="server" CssClass="profpic" ImageAlign="Middle" style="max-height:300px; width: auto; align-content:center;"/>
+                    <asp:Panel ID="Panel5" runat="server" style="text-align: right">
                         <br />
-                        <br />
-                        <asp:FileUpload ID="FileUpload1" runat="server" Visible="False" />
-                        <asp:Button ID="uploadBut" runat="server" OnClick="Upload" Text="Upload" Visible="False" />
-                        <asp:RegularExpressionValidator ID="uplValidator" runat="server" ControlToValidate="FileUpload1" EnableClientScript="False" ErrorMessage="Only JPEG, PNG, and GIF images are allowed" ForeColor="Red" 
-                            ValidationExpression="(.+\.([Jj][Pp][Gg])|.+\.([Pp][Nn][Gg])|.+\.([Gg][Ii][Ff]))"></asp:RegularExpressionValidator>
+                        <table class="auto-style1">
+                            <tr>
+                                <td>
+                                    <asp:Image ID="profImage" runat="server" CssClass="profpic" ImageAlign="Middle" style="max-height:300px; width: auto; align-content:center; text-align: right;" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control-static" style="position: relative; left: 495px;" Visible="False" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:Button ID="uploadBut" runat="server" CssClass="btn btn-info" OnClick="Upload" Text="Upload" Visible="False" />
+                                    <asp:RegularExpressionValidator ID="uplValidator" runat="server" ControlToValidate="FileUpload1" EnableClientScript="False" ErrorMessage="Only JPEG, PNG, and GIF images are allowed" ForeColor="Red" ValidationExpression="(.+\.([Jj][Pp][Gg])|.+\.([Pp][Nn][Gg])|.+\.([Gg][Ii][Ff]))"></asp:RegularExpressionValidator>
+                                </td>
+                            </tr>
+                        </table>
                     </asp:Panel>
                 </td>
                 <td>
-                    <asp:DataList ID="DataList1" runat="server" DataSourceID="SqlDataSource3" BackColor="#FFCCCC" BorderColor="#FF9966" BorderWidth="3px" CellPadding="5" Font-Bold="False" Font-Italic="False" Font-Names="Trebuchet MS" Font-Overline="False" Font-Strikeout="False" Font-Underline="False" ForeColor="Black" GridLines="Both" CellSpacing="20" OnEditCommand="DataList1_EditCommand" Width="300px" OnCancelCommand="DataList1_CancelCommand" OnUpdateCommand="DataList1_UpdateCommand" style="margin-right: 17px">
+                    <asp:DataList ID="DataList1" style="position: relative; margin-right: 17px; left: 20px" runat="server" DataSourceID="SqlDataSource3" BackColor="White" BorderColor="#337AB7" BorderWidth="3px" CellPadding="5" Font-Bold="False" Font-Italic="False" Font-Names="Trebuchet MS" Font-Overline="False" Font-Strikeout="False" Font-Underline="False" ForeColor="Black" GridLines="Both" CellSpacing="20" OnEditCommand="DataList1_EditCommand" Width="300px" OnCancelCommand="DataList1_CancelCommand" OnUpdateCommand="DataList1_UpdateCommand" >
                         <EditItemTemplate>
                             <strong>First Name:</strong> <strong>
                             <asp:TextBox ID="firstnamebox" runat="server" Text='<%# Eval("FirstName") %>'></asp:TextBox>
@@ -221,7 +234,7 @@
                 <asp:Parameter Name="Memo" />
             </UpdateParameters>
         </asp:SqlDataSource>
-            <asp:DataList ID="DataList2" runat="server" BackColor="#FFCCCC" DataKeyField="Id" DataSourceID="SqlDataSource4" Font-Bold="False" Font-Italic="False" Font-Names="Trebuchet MS" Font-Overline="False" Font-Size="Medium" Font-Strikeout="False" Font-Underline="False" style="margin-top: 0px; font-weight: 700;" Width="800px" BorderColor="#FF9966" BorderWidth="3px" CellPadding="20" CellSpacing="5" OnCancelCommand="DataList2_CancelCommand" OnEditCommand="DataList2_EditCommand" OnUpdateCommand="DataList2_UpdateCommand" HorizontalAlign="Center">
+            <asp:DataList ID="DataList2" runat="server" BackColor="White" DataKeyField="Id" DataSourceID="SqlDataSource4" Font-Bold="False" Font-Italic="False" Font-Names="Trebuchet MS" Font-Overline="False" Font-Size="Medium" Font-Strikeout="False" Font-Underline="False" style="margin-top: 0px; font-weight: 700;" Width="800px" BorderColor="#337AB7" BorderWidth="3px" CellPadding="20" CellSpacing="5" OnCancelCommand="DataList2_CancelCommand" OnEditCommand="DataList2_EditCommand" OnUpdateCommand="DataList2_UpdateCommand" HorizontalAlign="Center">
                 <EditItemTemplate>
                     <asp:ImageButton ID="ImageButton2" runat="server" ImageAlign="Right" ImageUrl="~/img/cancel.png" CommandName="cancel"  />
                     <asp:ImageButton ID="ImageButton3" runat="server" ImageAlign="Right" ImageUrl="~/img/check.png" CommandName="update" />
@@ -262,34 +275,36 @@
         <br />
         <br />
         <br />
-        <asp:DropDownList ID="viewUserPortfolio" runat="server" DataSourceID="getUserPortfolioSource" DataTextField="Portfolio" DataValueField="Portfolio">
+        <asp:DropDownList ID="viewUserPortfolio" runat="server" DataSourceID="getUserPortfolioSource" DataTextField="Portfolio" DataValueField="Portfolio" CssClass="form-control" Width="177px">
         </asp:DropDownList>
 &nbsp;
-        <asp:Button ID="viewPortfolioButton" runat="server" OnClick="viewPortfolioButton_Click" Text="View Portfolio" />
-        <br />
-        <br />
-        <table align="center" class="auto-style4">
-            <tr>
-                <td>
-                    <h4>Net Value of Assets</h4>
-                </td>
-                <td>
-                    <h4>Growth Since Inception</h4>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <asp:Label ID="NetValue" runat="server"></asp:Label>
-                </td>
-                <td>
-                    <asp:Label ID="Growth" runat="server"></asp:Label>
-                </td>
-            </tr>
-        </table>
+        <asp:Button ID="viewPortfolioButton" runat="server" OnClick="viewPortfolioButton_Click" Text="View Portfolio" CssClass="btn btn-info" />
         <br />
         <br />
         <br />
-        <asp:Panel ID="Panel3" runat="server">
+        <asp:Panel ID="Panel4" runat="server" Visible="False" HorizontalAlign="Center">
+            <table align="center" class="auto-style4">
+                <tr>
+                    <td class="auto-style15">
+                        <h4 class="auto-style14">Net Value of Assets</h4>
+                    </td>
+                    <td class="auto-style13">
+                        <h4 class="auto-style14">Growth Since Inception</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style16">
+                        $<asp:Label ID="NetValue" runat="server"></asp:Label>
+                    </td>
+                    <td class="auto-style16">
+                        $<asp:Label ID="Growth" runat="server"></asp:Label>
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+        <br />
+        <br />
+        <asp:Panel ID="Panel3" runat="server" Visible="False">
             <table class="auto-style1" style="width: 100%; margin-left: 200px;">
                 <tr>
                     <td class="auto-style3">
@@ -430,41 +445,70 @@
             <table class="auto-style1">
                 <tr>
                     <td class="auto-style2">
-                        <h4>Add New Portfolio:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Delete Portfolio:</h4>
-                        <h4>
-                            <asp:TextBox ID="newPortfolioField" runat="server"></asp:TextBox>
-                            &nbsp;<asp:Button ID="addPortfolio" runat="server" Text="Add" OnClick="addPortfolio_Click" />
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <asp:DropDownList ID="deletePortfolioDrop" runat="server" DataSourceID="SqlDataSource6" DataTextField="Portfolio" DataValueField="Portfolio">
-                            </asp:DropDownList>
-                            &nbsp;<asp:Button ID="deletePortfolio" runat="server" Text="Delete" OnClick="deletePortfolio_Click" />
-                        </h4>
+
+                        <table class="auto-style1">
+                            <tr>
+                                <td class="auto-style10"><h4>Add New Portfolio:</h4></td>
+                                <td><h4>Delete Portfolio:</h4></td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style10">
+                                    <asp:TextBox ID="newPortfolioField" runat="server" CssClass="form-control"></asp:TextBox>
+                                    <asp:Button ID="addPortfolio" runat="server" CssClass="btn btn-info" OnClick="addPortfolio_Click" Text="Add" />
+                                </td>
+                                <td>
+                                    <asp:DropDownList ID="deletePortfolioDrop" runat="server" CssClass="form-control" DataSourceID="SqlDataSource6" DataTextField="Portfolio" DataValueField="Portfolio" Width="120px">
+                                    </asp:DropDownList>
+                                    <asp:Button ID="deletePortfolio" runat="server" CssClass="btn btn-info" OnClick="deletePortfolio_Click" Text="Delete" />
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+
+                        <br />
                         <p>
                             <asp:Label ID="addLabel" runat="server" ForeColor="Red"></asp:Label>
                         </p>
                         <h4>Quote Ticker:</h4>
-                        <input type="text" value="" id="txtSymbol" runat="server" onkeypress="return CheckEnter(event);" />
-                        <asp:Button ID="Button2" runat="server" Text="Get Quote" OnClick="SendRequest" />
+                        <input type="text" value="" class="form-control" id="txtSymbol" runat="server" onkeypress="return CheckEnter(event);" width="100px" />
+                        <asp:Button ID="Button2" runat="server" Text="Get Quote" OnClick="SendRequest" CssClass="btn btn-info" />
                         <br />
                         <span style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;	color: #666;">e.g. &quot;YHOO or YHOO GOOG&quot; </span>
                         <br />
                         <asp:Label ID="quotelabel" runat="server" ForeColor="Red"></asp:Label>
                         <br />
+                        <br />
                         <h4>Buy/Sell:</h4>
-                        &nbsp;Portfolio:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ticker:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Quantity:<br />&nbsp;
-                        <asp:DropDownList ID="portfolioSelection" runat="server" DataSourceID="portfolioSelectSource" DataTextField="Portfolio" DataValueField="Portfolio">
-                        </asp:DropDownList>
-                        &nbsp;&nbsp;&nbsp;
-                        <asp:DropDownList ID="buyOrSell" runat="server">
-                            <asp:ListItem>Buy</asp:ListItem>
-                            <asp:ListItem>Sell</asp:ListItem>
-                        </asp:DropDownList>
-                        &nbsp;&nbsp;&nbsp;
-                        <asp:TextBox ID="tradeTicker" runat="server" MaxLength="5"></asp:TextBox>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <asp:TextBox ID="quantityField" runat="server"></asp:TextBox>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <asp:Button ID="tradeButton" runat="server" OnClick="confirmTransaction_Click" Text="Trade" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<table class="auto-style1">
+                            <tr>
+                                <td class="auto-style6">Portfolio:&nbsp;&nbsp;</td>
+                                <td class="auto-style11">&nbsp;</td>
+                                <td class="auto-style7">&nbsp;Ticker:</td>
+                                <td class="auto-style12">&nbsp;Quantity:</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style6">
+                                    <asp:DropDownList ID="portfolioSelection" runat="server" CssClass="form-control" DataSourceID="portfolioSelectSource" DataTextField="Portfolio" DataValueField="Portfolio">
+                                    </asp:DropDownList>
+                                </td>
+                                <td class="auto-style11">
+                                    <asp:DropDownList ID="buyOrSell" runat="server" CssClass="form-control">
+                                        <asp:ListItem>Buy</asp:ListItem>
+                                        <asp:ListItem>Sell</asp:ListItem>
+                                    </asp:DropDownList>
+                                </td>
+                                <td class="auto-style7">
+                                    <asp:TextBox ID="tradeTicker" runat="server" CssClass="form-control" MaxLength="5"></asp:TextBox>
+                                </td>
+                                <td class="auto-style12">
+                                    <asp:TextBox ID="quantityField" runat="server" CssClass="form-control" Width="50px"></asp:TextBox>
+                                </td>
+                                <td>
+                                    <asp:Button ID="tradeButton" runat="server" CssClass="btn btn-info" OnClick="confirmTransaction_Click" Text="Trade" />
+                                </td>
+                            </tr>
+                        </table>
                         <br />
                         <asp:Label ID="amountlabel" runat="server" ForeColor="Red"></asp:Label>
                         <br />
@@ -506,6 +550,36 @@
         }
         .auto-style3 {
             width: 105px;
+        }
+        .auto-style6 {
+            width: 113px;
+        }
+        .auto-style7 {
+            width: 157px;
+        }
+        .auto-style10 {
+            width: 209px;
+        }
+        .auto-style11 {
+            width: 97px;
+        }
+        .auto-style12 {
+            width: 122px;
+        }
+        .auto-style13 {
+            text-align: center;
+            background-color: #333399;
+        }
+        .auto-style14 {
+            color: #FFFFFF;
+        }
+        .auto-style15 {
+            color: #FFFFFF;
+            text-align: center;
+            background-color: #333399;
+        }
+        .auto-style16 {
+            text-align: center;
         }
         </style>
     </asp:Content>
