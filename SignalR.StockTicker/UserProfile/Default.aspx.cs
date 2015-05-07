@@ -168,6 +168,9 @@ public partial class UserProfile : System.Web.UI.Page
             if (Request.QueryString["username"] == hiddenUsername.Value) {
                 FileUpload1.Visible = true;
                 uploadBut.Visible = true;
+                portfolioPanel.Visible = true;
+                deletePortfolioDrop.ClearSelection();
+                portfolioSelection.ClearSelection();
                 
             }
 
@@ -384,12 +387,94 @@ public partial class UserProfile : System.Web.UI.Page
     }
 
     protected void confirmTransaction_Click(object sender, EventArgs e) {
+        if (portfolioSelection.SelectedIndex == -1) {
+            amountlabel.Text = "No portfolio selected.";
+            return;
+        }
 
+        if (tradeTicker.Text == "") {
+            amountlabel.Text = "No ticker entered.";
+            return;
+        }
+
+        if ((quantityField.Text == "")) {
+            amountlabel.Text = "Quantity not specified.";
+            return;
+
+        }
+
+        int quantity;
+        if(int.TryParse(quantityField.Text, out quantity)){
+            amountlabel.Text = "You must enter an integer for the quantity.";
+            return;
+        }
+
+        hiddenEpoch.Value = DateTime.Now.ToString("yyyyMMddHHmmss");
+
+        //hiddenPrice.Value = ;
+
+        if (buyOrSell.SelectedValue  == "Sell") {
+            DataView dv = (DataView)SqlDataSource7.Select(DataSourceSelectArguments.Empty);
+            DataRow row = dv.Table.Rows[0];
+            int dbquantity = (int)row["Quantity"];
+            if (dbquantity == null) {
+                amountlabel.Text = "Portfolio does not own this stock.";
+                return;
+            }
+            if (quantity > dbquantity) {
+                amountlabel.Text = "Entered quantity exceeds portfolio stock.";
+                return;
+            }
+            //execute sell code
+            return;
+        }
+        //execute buy code
+
+        
+    }
+    protected float get_price(string ticker) {
+
+//        float time = DateTime.Now();
+
+        return 0;
     }
 
+    protected void addPortfolio_Click(object sender, EventArgs e) {
+        
+        if (newPortfolioField.Text == "") {
+            return;
+        }
+
+        DataView dv = (DataView)SqlDataSource5.Select(DataSourceSelectArguments.Empty);
+        DataRow row = dv.Table.Rows[0];
+        int count = (int)row["number"];
+
+        if (count > 0) {
+            addLabel.Text = "Portfolio already exists.";
+            return;
+        }
+
+        SqlDataSource5.Insert();
+        deletePortfolioDrop.DataBind();
+        portfolioSelection.DataBind();
+        deletePortfolioDrop.ClearSelection();
+        portfolioSelection.ClearSelection();
+        addLabel.Text = "Portfolio added successfully.";
+    }
+
+    protected void deletePortfolio_Click(object sender, EventArgs e) {
+        
+        try {
+            SqlDataSource6.Delete();
+            addLabel.Text = "Portfolio deleted successfully.";
+            return;
+        } catch {
+            addLabel.Text = "Portfolio does not exist.";
+        }
+    }
+
+
     
-
-
 }
 
 

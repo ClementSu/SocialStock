@@ -147,6 +147,78 @@ public partial class UserProfile {
     protected global::System.Web.UI.WebControls.DataList DataList2;
     
     /// <summary>
+    /// SqlDataSource5 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource5;
+    
+    /// <summary>
+    /// SqlDataSource6 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource6;
+    
+    /// <summary>
+    /// portfolioPanel control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Panel portfolioPanel;
+    
+    /// <summary>
+    /// newPortfolioField control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox newPortfolioField;
+    
+    /// <summary>
+    /// addPortfolio control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button addPortfolio;
+    
+    /// <summary>
+    /// deletePortfolioDrop control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.DropDownList deletePortfolioDrop;
+    
+    /// <summary>
+    /// deletePortfolio control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button deletePortfolio;
+    
+    /// <summary>
+    /// addLabel control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label addLabel;
+    
+    /// <summary>
     /// txtSymbol control.
     /// </summary>
     /// <remarks>
@@ -174,13 +246,49 @@ public partial class UserProfile {
     protected global::System.Web.UI.WebControls.Label quotelabel;
     
     /// <summary>
-    /// stockamount control.
+    /// SqlDataSource7 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox stockamount;
+    protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource7;
+    
+    /// <summary>
+    /// transactionDataSource control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.SqlDataSource transactionDataSource;
+    
+    /// <summary>
+    /// hiddenEpoch control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.HiddenField hiddenEpoch;
+    
+    /// <summary>
+    /// hiddenPrice control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.HiddenField hiddenPrice;
+    
+    /// <summary>
+    /// portfolioSelection control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.DropDownList portfolioSelection;
     
     /// <summary>
     /// buyOrSell control.
@@ -192,13 +300,31 @@ public partial class UserProfile {
     protected global::System.Web.UI.WebControls.DropDownList buyOrSell;
     
     /// <summary>
-    /// confirmTransaction control.
+    /// tradeTicker control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Button confirmTransaction;
+    protected global::System.Web.UI.WebControls.TextBox tradeTicker;
+    
+    /// <summary>
+    /// quantityField control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox quantityField;
+    
+    /// <summary>
+    /// tradeButton control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button tradeButton;
     
     /// <summary>
     /// amountlabel control.
