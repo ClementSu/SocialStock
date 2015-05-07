@@ -385,25 +385,45 @@ public partial class UserProfile : System.Web.UI.Page
     }
 
     protected void confirmTransaction_Click(object sender, EventArgs e) {
+
+        string url = Request.RawUrl;
         if (portfolioSelection.SelectedIndex == -1) {
-            amountlabel.Text = "No portfolio selected.";
+            newPortfolioField.Text = "";
+            portfolioSelection.SelectedIndex = -1;
+            tradeTicker.Text = "";
+            quantityField.Text = "";
+            Response.Write("<script>alert('" + "No portfolio selected." + "');" + "window.location='" + url + "';</script>");
+           
             return;
         }
 
         if (tradeTicker.Text == "") {
-            amountlabel.Text = "No ticker entered.";
+            newPortfolioField.Text = "";
+            portfolioSelection.SelectedIndex = -1;
+            tradeTicker.Text = "";
+            quantityField.Text = "";
+            Response.Write("<script>alert('" + "No ticker entered." + "');" + "window.location='" + url + "';</script>");
+
             return;
         }
 
         if ((quantityField.Text == "")) {
-            amountlabel.Text = "Quantity not specified.";
+            newPortfolioField.Text = "";
+            portfolioSelection.SelectedIndex = -1;
+            tradeTicker.Text = "";
+            quantityField.Text = "";
+            Response.Write("<script>alert('" + "Qunatity not specified." + "');" + "window.location='" + url + "';</script>");
             return;
 
         }
 
         int quantity;
         if(!(int.TryParse(quantityField.Text, out quantity))){
-            amountlabel.Text = "You must enter an integer for the quantity.";
+            newPortfolioField.Text = "";
+            portfolioSelection.SelectedIndex = -1;
+            tradeTicker.Text = "";
+            quantityField.Text = "";
+            Response.Write("<script>alert('" + "You must enter an integer for the quantity." + "');" + "window.location='" + url + "';</script>");
             return;
         }
 
@@ -415,25 +435,48 @@ public partial class UserProfile : System.Web.UI.Page
             
             
             if (dv.Table.Rows.Count == 0) {
-                amountlabel.Text = "Portfolio does not own this stock.";
+                newPortfolioField.Text = "";
+                portfolioSelection.SelectedIndex = -1;
+                tradeTicker.Text = "";
+                quantityField.Text = "";
+                Response.Write("<script>alert('" + "Portfolio does not own this stock." + "');" + "window.location='" + url + "';</script>");
+
                 return;
             }
             DataRow row = dv.Table.Rows[0];
             int dbquantity = (int)row["Quantity"];
             if (quantity > dbquantity) {
-                amountlabel.Text = "Entered quantity exceeds portfolio stock.";
+                
+                newPortfolioField.Text = "";
+                portfolioSelection.SelectedIndex = -1;
+                tradeTicker.Text = "";
+                quantityField.Text = "";
+                Response.Write("<script>alert('" + "Entered quantity exceeds portfolio stock." + "');" + "window.location='" + url + "';</script>");
                 return;
             }
-            //execute sell code
-            amountlabel.Text = "Successfully sold " + quantityField.Text + " shares of "
-                + tradeTicker.Text + " at " + hiddenPrice.Value + "$ per share.";
+            
            
             //transactions
             transactionDataSource.Insert();
 
+
+
             //balance sheet
             quantityField.Text = "-" + quantityField.Text;
             balanceSheetDataSource.Update();
+            newPortfolioField.Text = "";
+            portfolioSelection.SelectedIndex = -1;
+            tradeTicker.Text = "";
+            quantityField.Text = "";
+            balanceSheetGrid.DataBind();
+            transactionGrid.DataBind();
+            //execute sell code
+            string alerttext = "Successfully sold " + quantityField.Text + " shares of "
+                + tradeTicker.Text + " at " + hiddenPrice.Value + "$ per share.";
+            
+            Response.Write("<script>alert('" + alerttext + "');" + "window.location='" + url + "';</script>");
+            
+            
             return;
         }
         //execute buy code
@@ -441,8 +484,8 @@ public partial class UserProfile : System.Web.UI.Page
         //store buy to transactions
         try {
             transactionDataSource.Insert();
-            amountlabel.Text = "Successfully purchased " + quantityField.Text +" shares of "
-                + tradeTicker.Text +" at " + hiddenPrice.Value +"$ per share.";
+
+            
         } catch {
             amountlabel.Text = "Failed to save trade to transactions.";
         }
@@ -452,14 +495,25 @@ public partial class UserProfile : System.Web.UI.Page
         if (dv.Table.Rows.Count == 0) {
             //insert new row
             balanceSheetDataSource.Insert();
+            string alerttext = "Successfully purchased " + quantityField.Text + " shares of "
+                + tradeTicker.Text + " at " + hiddenPrice.Value + "$ per share.";
+            Response.Write("<script>alert('" + alerttext + "');" + "window.location='" + url + "';</script>");
 
         } else {
             //else add to existing quantity
             balanceSheetDataSource.Update();
+            string alerttext = "Successfully purchased " + quantityField.Text + " shares of "
+                + tradeTicker.Text + " at " + hiddenPrice.Value + "$ per share.";
+            Response.Write("<script>alert('" + alerttext + "');" + "window.location='" + url + "';</script>");
         }
 
             //amountlabel.Text = "Failed to save trade to balancesheet.";
-        
+        newPortfolioField.Text = "";
+        portfolioSelection.SelectedIndex = -1;
+        tradeTicker.Text = "";
+        quantityField.Text = "";
+        balanceSheetGrid.DataBind();
+        transactionGrid.DataBind();
         return;
     }
 
@@ -527,7 +581,10 @@ public partial class UserProfile : System.Web.UI.Page
         SqlDataSource5.Insert();
         deletePortfolioDrop.DataBind();
         portfolioSelection.DataBind();
-        addLabel.Text = "Portfolio added successfully.";
+        string alerttext = "Portfolio added successfully";
+        string url = Request.RawUrl;
+        Response.Write("<script>alert('" + alerttext + "');" + "window.location='" + url + "';</script>");
+        
     }
 
     protected void deletePortfolio_Click(object sender, EventArgs e) {
@@ -538,7 +595,9 @@ public partial class UserProfile : System.Web.UI.Page
             transactionDataSource.Delete();
             deletePortfolioDrop.DataBind();
             portfolioSelection.DataBind();
-            addLabel.Text = "Portfolio deleted successfully.";
+            string alerttext = "Portfolio deleted successfully";
+            string url = Request.RawUrl;
+            Response.Write("<script>alert('" + alerttext + "');" + "window.location='" + url + "';</script>");
             return;
         } catch {
             addLabel.Text = "Portfolio does not exist.";

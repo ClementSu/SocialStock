@@ -275,10 +275,10 @@
         <br />
         <br />
         <br />
-        <asp:DropDownList ID="viewUserPortfolio" runat="server" DataSourceID="getUserPortfolioSource" DataTextField="Portfolio" DataValueField="Portfolio" CssClass="form-control" Width="177px">
+        <asp:DropDownList ID="viewUserPortfolio" style="position:relative; left: 100px" runat="server" DataSourceID="getUserPortfolioSource" DataTextField="Portfolio" DataValueField="Portfolio" CssClass="form-control" Width="177px">
         </asp:DropDownList>
 &nbsp;
-        <asp:Button ID="viewPortfolioButton" runat="server" OnClick="viewPortfolioButton_Click" Text="View Portfolio" CssClass="btn btn-info" />
+        <asp:Button ID="viewPortfolioButton" style="position:relative; left: 100px" runat="server" OnClick="viewPortfolioButton_Click" Text="View Portfolio" CssClass="btn btn-info" />
         <br />
         <br />
         <br />
