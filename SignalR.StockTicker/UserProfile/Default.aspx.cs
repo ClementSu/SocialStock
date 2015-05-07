@@ -169,8 +169,6 @@ public partial class UserProfile : System.Web.UI.Page
                 FileUpload1.Visible = true;
                 uploadBut.Visible = true;
                 portfolioPanel.Visible = true;
-                deletePortfolioDrop.ClearSelection();
-                portfolioSelection.ClearSelection();
                 
             }
 
@@ -427,6 +425,15 @@ public partial class UserProfile : System.Web.UI.Page
                 return;
             }
             //execute sell code
+            amountlabel.Text = "Successfully sold " + quantityField.Text + " shares of "
+                + tradeTicker.Text + " at " + hiddenPrice.Value + "$ per share.";
+           
+            //transactions
+            transactionDataSource.Insert();
+
+            //balance sheet
+            quantityField.Text = "-" + quantityField.Text;
+            balanceSheetDataSource.Update();
             return;
         }
         //execute buy code
@@ -450,8 +457,6 @@ public partial class UserProfile : System.Web.UI.Page
             //else add to existing quantity
             balanceSheetDataSource.Update();
         }
-
-        
 
             //amountlabel.Text = "Failed to save trade to balancesheet.";
         
@@ -522,8 +527,6 @@ public partial class UserProfile : System.Web.UI.Page
         SqlDataSource5.Insert();
         deletePortfolioDrop.DataBind();
         portfolioSelection.DataBind();
-        deletePortfolioDrop.ClearSelection();
-        portfolioSelection.ClearSelection();
         addLabel.Text = "Portfolio added successfully.";
     }
 
@@ -531,11 +534,21 @@ public partial class UserProfile : System.Web.UI.Page
         
         try {
             SqlDataSource6.Delete();
+            balanceSheetDataSource.Delete();
+            transactionDataSource.Delete();
+            deletePortfolioDrop.DataBind();
+            portfolioSelection.DataBind();
             addLabel.Text = "Portfolio deleted successfully.";
             return;
         } catch {
             addLabel.Text = "Portfolio does not exist.";
         }
+    }
+
+    protected void viewPortfolioButton_Click(object sender, EventArgs e) {
+        balanceSheetDataList.DataBind();
+        transactionDataList.DataBind();
+
     }
 
 

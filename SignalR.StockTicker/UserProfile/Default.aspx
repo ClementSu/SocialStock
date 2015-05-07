@@ -242,6 +242,49 @@
             </asp:DataList>
         <br />
         <br />
+        <asp:SqlDataSource ID="getUserPortfolioSource" runat="server" ConnectionString="<%$ ConnectionStrings:RegistrationConnectionString %>" SelectCommand="SELECT * FROM [Portfolios] WHERE ([Username] = @Username)">
+            <SelectParameters>
+                <asp:ControlParameter ControlID="hiddenView" Name="Username" PropertyName="Value" Type="String" />
+            </SelectParameters>
+        </asp:SqlDataSource>
+        <asp:SqlDataSource ID="userTransactionSource" runat="server" ConnectionString="<%$ ConnectionStrings:RegistrationConnectionString %>" SelectCommand="SELECT BuySell, Quantity, Ticker, Price, Epoch FROM Transactions WHERE (Username = @Username) AND (Portfolio = @Portfolio)">
+            <SelectParameters>
+                <asp:ControlParameter ControlID="hiddenView" Name="Username" PropertyName="Value" Type="String" />
+                <asp:ControlParameter ControlID="viewUserPortfolio" Name="Portfolio" PropertyName="SelectedValue" Type="String" />
+            </SelectParameters>
+        </asp:SqlDataSource>
+        <asp:SqlDataSource ID="userBalanceSheetSource" runat="server" ConnectionString="<%$ ConnectionStrings:RegistrationConnectionString %>" SelectCommand="SELECT [Quantity], [Ticker] FROM [BalanceSheet] WHERE (([Username] = @Username) AND ([Portfolio] = @Portfolio))">
+            <SelectParameters>
+                <asp:ControlParameter ControlID="hiddenView" Name="Username" PropertyName="Value" Type="String" />
+                <asp:ControlParameter ControlID="viewUserPortfolio" Name="Portfolio" PropertyName="SelectedValue" Type="String" />
+            </SelectParameters>
+        </asp:SqlDataSource>
+        <br />
+        <br />
+        <br />
+        <asp:DropDownList ID="viewUserPortfolio" runat="server" DataSourceID="getUserPortfolioSource" DataTextField="Portfolio" DataValueField="Portfolio">
+        </asp:DropDownList>
+&nbsp;
+        <asp:Button ID="viewPortfolioButton" runat="server" OnClick="viewPortfolioButton_Click" Text="View Portfolio" />
+        <br />
+        <table class="auto-style1">
+            <tr>
+                <td class="auto-style3">
+                    <asp:DataList ID="balanceSheetDataList" runat="server" DataSourceID="balanceSheetDataSource">
+                    </asp:DataList>
+                </td>
+                <td>
+                    <asp:DataList ID="transactionDataList" runat="server" DataSourceID="transactionDataSource">
+                    </asp:DataList>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:RegistrationConnectionString %>" InsertCommand="INSERT INTO Portfolios(Username, Portfolio) VALUES (@username, @portfolio)" SelectCommand="SELECT COUNT(*) AS number FROM Portfolios WHERE (Username = @username) AND (Portfolio = @portfolio)">
             <InsertParameters>
                 <asp:ControlParameter ControlID="hiddenUsername" Name="username" PropertyName="Value" />
@@ -260,6 +303,62 @@
             <SelectParameters>
                 <asp:ControlParameter ControlID="hiddenUsername" Name="username" PropertyName="Value" />
             </SelectParameters>
+        </asp:SqlDataSource>
+        <asp:SqlDataSource ID="PortfolioHasStock" runat="server" ConnectionString="<%$ ConnectionStrings:RegistrationConnectionString %>" SelectCommand="SELECT Quantity FROM BalanceSheet WHERE (Username = @username) AND (Portfolio = @portfolio) AND (Ticker = @ticker)" InsertCommand="INSERT INTO Transactions(Username, BuySell, Quantity, Epoch, Price, Ticker, Portfolio) VALUES (@username, @buysell, @quantity, @epoch, @price, @ticker, @portfolio)">
+                            <InsertParameters>
+                                <asp:ControlParameter ControlID="hiddenUsername" Name="username" PropertyName="Value" />
+                                <asp:ControlParameter ControlID="buyOrSell" Name="buysell" PropertyName="SelectedValue" />
+                                <asp:ControlParameter ControlID="quantityField" Name="quantity" PropertyName="Text" />
+                                <asp:ControlParameter ControlID="hiddenEpoch" Name="epoch" PropertyName="Value" />
+                                <asp:ControlParameter ControlID="hiddenPrice" Name="price" PropertyName="Value" />
+                                <asp:ControlParameter ControlID="tradeTicker" Name="ticker" PropertyName="Text" />
+                                <asp:ControlParameter ControlID="portfolioSelection" Name="portfolio" PropertyName="SelectedValue" />
+                            </InsertParameters>
+                            <SelectParameters>
+                                <asp:ControlParameter ControlID="hiddenUsername" Name="username" PropertyName="Value" />
+                                <asp:ControlParameter ControlID="portfolioSelection" Name="portfolio" PropertyName="SelectedValue" />
+                                <asp:ControlParameter ControlID="tradeTicker" Name="ticker" PropertyName="Text" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>
+                        <asp:SqlDataSource ID="transactionDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:RegistrationConnectionString %>" InsertCommand="INSERT INTO Transactions(Username, BuySell, Quantity, Epoch, Price, Ticker, Portfolio) VALUES (@username, @buysell, @quantity, @epoch, @price, @ticker, @portfolio)" SelectCommand="SELECT * FROM [Transactions]" DeleteCommand="DELETE FROM Transactions WHERE (Username = @username) AND (Portfolio = @portfolio)">
+                            <DeleteParameters>
+                                <asp:ControlParameter ControlID="hiddenUsername" Name="username" PropertyName="Value" />
+                                <asp:ControlParameter ControlID="deletePortfolioDrop" Name="portfolio" PropertyName="SelectedValue" />
+                            </DeleteParameters>
+                            <InsertParameters>
+                                <asp:ControlParameter ControlID="hiddenUsername" Name="username" PropertyName="Value" />
+                                <asp:ControlParameter ControlID="buyOrSell" Name="buysell" PropertyName="SelectedValue" />
+                                <asp:ControlParameter ControlID="quantityField" Name="quantity" PropertyName="Text" Type="Int32" />
+                                <asp:ControlParameter ControlID="hiddenEpoch" Name="epoch" PropertyName="Value" />
+                                <asp:ControlParameter ControlID="hiddenPrice" Name="price" PropertyName="Value" />
+                                <asp:ControlParameter ControlID="tradeTicker" Name="ticker" PropertyName="Text" />
+                                <asp:ControlParameter ControlID="portfolioSelection" Name="portfolio" PropertyName="SelectedValue" />
+                            </InsertParameters>
+                        </asp:SqlDataSource>
+                        <asp:SqlDataSource ID="balanceSheetDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:RegistrationConnectionString %>" InsertCommand="INSERT INTO BalanceSheet(Username, Portfolio, Ticker, Quantity) VALUES (@username, @portfolio, @ticker, @quantity)" SelectCommand="SELECT * FROM [BalanceSheet]" UpdateCommand="UPDATE BalanceSheet SET Quantity = Quantity + @quantity WHERE (Username = @username) AND (Portfolio = @portfolio) AND (Ticker = @ticker)" DeleteCommand="DELETE FROM BalanceSheet WHERE (Username = @username) AND (Portfolio = @portfolio)">
+                            <DeleteParameters>
+                                <asp:ControlParameter ControlID="hiddenUsername" Name="username" PropertyName="Value" />
+                                <asp:ControlParameter ControlID="deletePortfolioDrop" Name="portfolio" PropertyName="SelectedValue" />
+                            </DeleteParameters>
+                            <InsertParameters>
+                                <asp:ControlParameter ControlID="hiddenUsername" Name="username" PropertyName="Value" />
+                                <asp:ControlParameter ControlID="portfolioSelection" Name="portfolio" PropertyName="SelectedValue" />
+                                <asp:ControlParameter ControlID="tradeTicker" Name="ticker" PropertyName="Text" />
+                                <asp:ControlParameter ControlID="quantityField" Name="quantity" PropertyName="Text" />
+                            </InsertParameters>
+                            <UpdateParameters>
+                                <asp:ControlParameter ControlID="quantityField" Name="quantity" PropertyName="Text" />
+                                <asp:ControlParameter ControlID="hiddenUsername" Name="username" PropertyName="Value" />
+                                <asp:ControlParameter ControlID="portfolioSelection" Name="portfolio" PropertyName="SelectedValue" />
+                                <asp:ControlParameter ControlID="tradeTicker" Name="ticker" PropertyName="Text" />
+                            </UpdateParameters>
+                        </asp:SqlDataSource>
+                        <asp:HiddenField ID="hiddenEpoch" runat="server" />
+                        <asp:HiddenField ID="hiddenPrice" runat="server" />
+                        <asp:SqlDataSource ID="portfolioSelectSource" runat="server" ConnectionString="<%$ ConnectionStrings:RegistrationConnectionString %>" SelectCommand="SELECT Username, Portfolio FROM Portfolios WHERE (Username = @username)">
+                            <SelectParameters>
+                                <asp:ControlParameter ControlID="hiddenUsername" Name="username" PropertyName="Value" />
+                            </SelectParameters>
         </asp:SqlDataSource>
         <br />
         <asp:Panel ID="portfolioPanel" runat="server" Visible="False">
@@ -285,53 +384,8 @@
                         <br />
                         <span style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;	color: #666;">e.g. "YHOO or YHOO GOOG" </span>
                         <h4>Buy/Sell:</h4>
-                        &nbsp;<asp:SqlDataSource ID="PortfolioHasStock" runat="server" ConnectionString="<%$ ConnectionStrings:RegistrationConnectionString %>" SelectCommand="SELECT Quantity FROM BalanceSheet WHERE (Username = @username) AND (Portfolio = @portfolio) AND (Ticker = @ticker)" InsertCommand="INSERT INTO Transactions(Username, BuySell, Quantity, Epoch, Price, Ticker, Portfolio) VALUES (@username, @buysell, @quantity, @epoch, @price, @ticker, @portfolio)">
-                            <InsertParameters>
-                                <asp:ControlParameter ControlID="hiddenUsername" Name="username" PropertyName="Value" />
-                                <asp:ControlParameter ControlID="buyOrSell" Name="buysell" PropertyName="SelectedValue" />
-                                <asp:ControlParameter ControlID="quantityField" Name="quantity" PropertyName="Text" />
-                                <asp:ControlParameter ControlID="hiddenEpoch" Name="epoch" PropertyName="Value" />
-                                <asp:ControlParameter ControlID="hiddenPrice" Name="price" PropertyName="Value" />
-                                <asp:ControlParameter ControlID="tradeTicker" Name="ticker" PropertyName="Text" />
-                                <asp:ControlParameter ControlID="portfolioSelection" Name="portfolio" PropertyName="SelectedValue" />
-                            </InsertParameters>
-                            <SelectParameters>
-                                <asp:ControlParameter ControlID="hiddenUsername" Name="username" PropertyName="Value" />
-                                <asp:ControlParameter ControlID="portfolioSelection" Name="portfolio" PropertyName="SelectedValue" />
-                                <asp:ControlParameter ControlID="tradeTicker" Name="ticker" PropertyName="Text" />
-                            </SelectParameters>
-                        </asp:SqlDataSource>
-                        <asp:SqlDataSource ID="transactionDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:RegistrationConnectionString %>" InsertCommand="INSERT INTO Transactions(Username, BuySell, Quantity, Epoch, Price, Ticker, Portfolio) VALUES (@username, @buysell, @quantity, @epoch, @price, @ticker, @portfolio)" SelectCommand="SELECT * FROM [Transactions]">
-                            <InsertParameters>
-                                <asp:ControlParameter ControlID="hiddenUsername" Name="username" PropertyName="Value" />
-                                <asp:ControlParameter ControlID="buyOrSell" Name="buysell" PropertyName="SelectedValue" />
-                                <asp:ControlParameter ControlID="quantityField" Name="quantity" PropertyName="Text" Type="Int32" />
-                                <asp:ControlParameter ControlID="hiddenEpoch" Name="epoch" PropertyName="Value" />
-                                <asp:ControlParameter ControlID="hiddenPrice" Name="price" PropertyName="Value" />
-                                <asp:ControlParameter ControlID="tradeTicker" Name="ticker" PropertyName="Text" />
-                                <asp:ControlParameter ControlID="portfolioSelection" Name="portfolio" PropertyName="SelectedValue" />
-                            </InsertParameters>
-                        </asp:SqlDataSource>
-                        <asp:SqlDataSource ID="balanceSheetDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:RegistrationConnectionString %>" InsertCommand="INSERT INTO BalanceSheet(Username, Portfolio, Ticker, Quantity) VALUES (@username, @portfolio, @ticker, @quantity)" SelectCommand="SELECT * FROM [BalanceSheet]" UpdateCommand="UPDATE BalanceSheet SET Quantity = Quantity + @quantity WHERE (Username = @username) AND (Portfolio = @portfolio) AND (Ticker = @ticker)">
-                            <InsertParameters>
-                                <asp:ControlParameter ControlID="hiddenUsername" Name="username" PropertyName="Value" />
-                                <asp:ControlParameter ControlID="portfolioSelection" Name="portfolio" PropertyName="SelectedValue" />
-                                <asp:ControlParameter ControlID="tradeTicker" Name="ticker" PropertyName="Text" />
-                                <asp:ControlParameter ControlID="quantityField" Name="quantity" PropertyName="Text" />
-                            </InsertParameters>
-                            <UpdateParameters>
-                                <asp:ControlParameter ControlID="quantityField" Name="quantity" PropertyName="Text" />
-                                <asp:ControlParameter ControlID="hiddenUsername" Name="username" PropertyName="Value" />
-                                <asp:ControlParameter ControlID="portfolioSelection" Name="portfolio" PropertyName="SelectedValue" />
-                                <asp:ControlParameter ControlID="tradeTicker" Name="ticker" PropertyName="Text" />
-                            </UpdateParameters>
-                        </asp:SqlDataSource>
-                        <br />
-                        <asp:HiddenField ID="hiddenEpoch" runat="server" />
-                        <br />
-                        <asp:HiddenField ID="hiddenPrice" runat="server" />
-                        <br />
-                        <br /> &nbsp;Portfolio:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ticker:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Quantity:<br /> &nbsp;<asp:DropDownList ID="portfolioSelection" runat="server" DataSourceID="SqlDataSource6" DataTextField="Portfolio" DataValueField="Portfolio">
+                        &nbsp;Portfolio:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ticker:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Quantity:<br />&nbsp;
+                        <asp:DropDownList ID="portfolioSelection" runat="server" DataSourceID="portfolioSelectSource" DataTextField="Portfolio" DataValueField="Portfolio">
                         </asp:DropDownList>
                         &nbsp;&nbsp;&nbsp;
                         <asp:DropDownList ID="buyOrSell" runat="server">
@@ -377,6 +431,9 @@
     <style type="text/css">
         .auto-style2 {
             width: 593px;
+        }
+        .auto-style3 {
+            width: 429px;
         }
     </style>
     </asp:Content>
