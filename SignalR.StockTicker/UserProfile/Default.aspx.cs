@@ -545,10 +545,46 @@ public partial class UserProfile : System.Web.UI.Page
         }
     }
 
-    protected void viewPortfolioButton_Click(object sender, EventArgs e) {
-        balanceSheetDataList.DataBind();
-        transactionDataList.DataBind();
+    
 
+    protected void viewPortfolioButton_Click(object sender, EventArgs e) {
+        try
+        {
+            balanceSheetGrid.DataBind();
+            transactionGrid.DataBind();
+            //total current value of portfolio
+            DataView dv = (DataView)userBalanceSheetSource.Select(DataSourceSelectArguments.Empty);
+            float TotalValue = 0;
+
+            foreach (DataRowView rowView in dv)
+            {
+                DataRow row = rowView.Row;
+                TotalValue += get_price((string)row["Ticker"]) * (int)row["Quantity"];
+            }
+            NetValue.Text = TotalValue.ToString();
+            //total gains since inception
+            //Totalvalue - buys + sells
+            dv = (DataView)userTransactionSource.Select(DataSourceSelectArguments.Empty);
+            double TotalGain = TotalValue;
+            foreach (DataRowView rowView in dv)
+            {
+                DataRow row = rowView.Row;
+                if ((string)row["BuySell"] == "Sell")
+                {
+                    TotalGain += (double)row["Price"] * (int)row["Quantity"];
+                }
+                if ((string)row["BuySell"] == "Buy")
+                {
+                    TotalGain -= (double)row["Price"] * (int)row["Quantity"];
+                }
+            }
+            int intGrowth = Convert.ToInt32(TotalGain);
+            Growth.Text = intGrowth.ToString();
+        }
+        catch
+        {
+
+        }
     }
 
 

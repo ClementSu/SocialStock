@@ -192,22 +192,49 @@ public partial class UserProfile {
     protected global::System.Web.UI.WebControls.Button viewPortfolioButton;
     
     /// <summary>
-    /// balanceSheetDataList control.
+    /// NetValue control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.DataList balanceSheetDataList;
+    protected global::System.Web.UI.WebControls.Label NetValue;
     
     /// <summary>
-    /// transactionDataList control.
+    /// Growth control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.DataList transactionDataList;
+    protected global::System.Web.UI.WebControls.Label Growth;
+    
+    /// <summary>
+    /// Panel3 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Panel Panel3;
+    
+    /// <summary>
+    /// balanceSheetGrid control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView balanceSheetGrid;
+    
+    /// <summary>
+    /// transactionGrid control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView transactionGrid;
     
     /// <summary>
     /// SqlDataSource5 control.

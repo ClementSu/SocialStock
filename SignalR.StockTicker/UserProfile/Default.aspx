@@ -267,18 +267,75 @@
 &nbsp;
         <asp:Button ID="viewPortfolioButton" runat="server" OnClick="viewPortfolioButton_Click" Text="View Portfolio" />
         <br />
-        <table class="auto-style1">
+        <br />
+        <table align="center" class="auto-style4">
             <tr>
-                <td class="auto-style3">
-                    <asp:DataList ID="balanceSheetDataList" runat="server" DataSourceID="balanceSheetDataSource">
-                    </asp:DataList>
+                <td>
+                    <h4>Net Value of Assets</h4>
                 </td>
                 <td>
-                    <asp:DataList ID="transactionDataList" runat="server" DataSourceID="transactionDataSource">
-                    </asp:DataList>
+                    <h4>Growth Since Inception</h4>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="NetValue" runat="server"></asp:Label>
+                </td>
+                <td>
+                    <asp:Label ID="Growth" runat="server"></asp:Label>
                 </td>
             </tr>
         </table>
+        <br />
+        <br />
+        <br />
+        <asp:Panel ID="Panel3" runat="server">
+            <table class="auto-style1" style="width: 100%; margin-left: 200px;">
+                <tr>
+                    <td class="auto-style3">
+                        <h4>Balance Sheet:</h4>
+                        <asp:GridView ID="balanceSheetGrid" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#E7E7FF" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataSourceID="balanceSheetDataSource" GridLines="Horizontal" Width="238px">
+                            <AlternatingRowStyle BackColor="#F7F7F7" />
+                            <Columns>
+                                <asp:BoundField DataField="Quantity" HeaderText="Quantity" SortExpression="Quantity" />
+                                <asp:BoundField DataField="Ticker" HeaderText="Ticker" SortExpression="Ticker" />
+                            </Columns>
+                            <FooterStyle BackColor="#B5C7DE" ForeColor="#4A3C8C" />
+                            <HeaderStyle BackColor="#4A3C8C" Font-Bold="True" ForeColor="#F7F7F7" />
+                            <PagerStyle BackColor="#E7E7FF" ForeColor="#4A3C8C" HorizontalAlign="Right" />
+                            <RowStyle BackColor="#E7E7FF" ForeColor="#4A3C8C" />
+                            <SelectedRowStyle BackColor="#738A9C" Font-Bold="True" ForeColor="#F7F7F7" />
+                            <SortedAscendingCellStyle BackColor="#F4F4FD" />
+                            <SortedAscendingHeaderStyle BackColor="#5A4C9D" />
+                            <SortedDescendingCellStyle BackColor="#D8D8F0" />
+                            <SortedDescendingHeaderStyle BackColor="#3E3277" />
+                        </asp:GridView>
+                    </td>
+                    <td>
+                        <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Transaction Log:</h4>
+                        <asp:GridView ID="transactionGrid" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#E7E7FF" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataSourceID="transactionDataSource" GridLines="Horizontal" style="margin-left: 38px" Width="721px">
+                            <AlternatingRowStyle BackColor="#F7F7F7" />
+                            <Columns>
+                                <asp:BoundField DataField="BuySell" HeaderText="BuySell" SortExpression="BuySell" />
+                                <asp:BoundField DataField="Quantity" HeaderText="Quantity" SortExpression="Quantity" />
+                                <asp:BoundField DataField="Ticker" HeaderText="Ticker" SortExpression="Ticker" />
+                                <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" />
+                                <asp:BoundField DataField="Epoch" HeaderText="Epoch" SortExpression="Epoch" />
+                            </Columns>
+                            <FooterStyle BackColor="#B5C7DE" ForeColor="#4A3C8C" />
+                            <HeaderStyle BackColor="#4A3C8C" Font-Bold="True" ForeColor="#F7F7F7" />
+                            <PagerStyle BackColor="#E7E7FF" ForeColor="#4A3C8C" HorizontalAlign="Right" />
+                            <RowStyle BackColor="#E7E7FF" ForeColor="#4A3C8C" />
+                            <SelectedRowStyle BackColor="#738A9C" Font-Bold="True" ForeColor="#F7F7F7" />
+                            <SortedAscendingCellStyle BackColor="#F4F4FD" />
+                            <SortedAscendingHeaderStyle BackColor="#5A4C9D" />
+                            <SortedDescendingCellStyle BackColor="#D8D8F0" />
+                            <SortedDescendingHeaderStyle BackColor="#3E3277" />
+                        </asp:GridView>
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
         <br />
         <br />
         <br />
@@ -320,7 +377,7 @@
                                 <asp:ControlParameter ControlID="tradeTicker" Name="ticker" PropertyName="Text" />
                             </SelectParameters>
                         </asp:SqlDataSource>
-                        <asp:SqlDataSource ID="transactionDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:RegistrationConnectionString %>" InsertCommand="INSERT INTO Transactions(Username, BuySell, Quantity, Epoch, Price, Ticker, Portfolio) VALUES (@username, @buysell, @quantity, @epoch, @price, @ticker, @portfolio)" SelectCommand="SELECT * FROM [Transactions]" DeleteCommand="DELETE FROM Transactions WHERE (Username = @username) AND (Portfolio = @portfolio)">
+                        <asp:SqlDataSource ID="transactionDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:RegistrationConnectionString %>" InsertCommand="INSERT INTO Transactions(Username, BuySell, Quantity, Epoch, Price, Ticker, Portfolio) VALUES (@username, @buysell, @quantity, @epoch, @price, @ticker, @portfolio)" SelectCommand="SELECT BuySell, Quantity, Ticker, Price, Epoch FROM Transactions WHERE (Username = @Username) AND (Portfolio = @Portfolio)" DeleteCommand="DELETE FROM Transactions WHERE (Username = @username) AND (Portfolio = @portfolio)">
                             <DeleteParameters>
                                 <asp:ControlParameter ControlID="hiddenUsername" Name="username" PropertyName="Value" />
                                 <asp:ControlParameter ControlID="deletePortfolioDrop" Name="portfolio" PropertyName="SelectedValue" />
@@ -334,8 +391,12 @@
                                 <asp:ControlParameter ControlID="tradeTicker" Name="ticker" PropertyName="Text" />
                                 <asp:ControlParameter ControlID="portfolioSelection" Name="portfolio" PropertyName="SelectedValue" />
                             </InsertParameters>
+                            <SelectParameters>
+                                <asp:ControlParameter ControlID="hiddenView" Name="Username" PropertyName="Value" />
+                                <asp:ControlParameter ControlID="viewUserPortfolio" Name="Portfolio" PropertyName="SelectedValue" />
+                            </SelectParameters>
                         </asp:SqlDataSource>
-                        <asp:SqlDataSource ID="balanceSheetDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:RegistrationConnectionString %>" InsertCommand="INSERT INTO BalanceSheet(Username, Portfolio, Ticker, Quantity) VALUES (@username, @portfolio, @ticker, @quantity)" SelectCommand="SELECT * FROM [BalanceSheet]" UpdateCommand="UPDATE BalanceSheet SET Quantity = Quantity + @quantity WHERE (Username = @username) AND (Portfolio = @portfolio) AND (Ticker = @ticker)" DeleteCommand="DELETE FROM BalanceSheet WHERE (Username = @username) AND (Portfolio = @portfolio)">
+                        <asp:SqlDataSource ID="balanceSheetDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:RegistrationConnectionString %>" InsertCommand="INSERT INTO BalanceSheet(Username, Portfolio, Ticker, Quantity) VALUES (@username, @portfolio, @ticker, @quantity)" SelectCommand="SELECT Quantity, Ticker FROM BalanceSheet WHERE (Username = @Username) AND (Portfolio = @Portfolio)" UpdateCommand="UPDATE BalanceSheet SET Quantity = Quantity + @quantity WHERE (Username = @username) AND (Portfolio = @portfolio) AND (Ticker = @ticker)" DeleteCommand="DELETE FROM BalanceSheet WHERE (Username = @username) AND (Portfolio = @portfolio)">
                             <DeleteParameters>
                                 <asp:ControlParameter ControlID="hiddenUsername" Name="username" PropertyName="Value" />
                                 <asp:ControlParameter ControlID="deletePortfolioDrop" Name="portfolio" PropertyName="SelectedValue" />
@@ -346,6 +407,10 @@
                                 <asp:ControlParameter ControlID="tradeTicker" Name="ticker" PropertyName="Text" />
                                 <asp:ControlParameter ControlID="quantityField" Name="quantity" PropertyName="Text" />
                             </InsertParameters>
+                            <SelectParameters>
+                                <asp:ControlParameter ControlID="hiddenView" Name="Username" PropertyName="Value" />
+                                <asp:ControlParameter ControlID="viewUserPortfolio" Name="Portfolio" PropertyName="SelectedValue" />
+                            </SelectParameters>
                             <UpdateParameters>
                                 <asp:ControlParameter ControlID="quantityField" Name="quantity" PropertyName="Text" />
                                 <asp:ControlParameter ControlID="hiddenUsername" Name="username" PropertyName="Value" />
@@ -361,7 +426,7 @@
                             </SelectParameters>
         </asp:SqlDataSource>
         <br />
-        <asp:Panel ID="portfolioPanel" runat="server" Visible="False">
+        <asp:Panel ID="portfolioPanel" runat="server" Visible="False" style="margin-left: 97px">
             <table class="auto-style1">
                 <tr>
                     <td class="auto-style2">
@@ -380,9 +445,11 @@
                         <h4>Quote Ticker:</h4>
                         <input type="text" value="" id="txtSymbol" runat="server" onkeypress="return CheckEnter(event);" />
                         <asp:Button ID="Button2" runat="server" Text="Get Quote" OnClick="SendRequest" />
+                        <br />
+                        <span style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;	color: #666;">e.g. &quot;YHOO or YHOO GOOG&quot; </span>
+                        <br />
                         <asp:Label ID="quotelabel" runat="server" ForeColor="Red"></asp:Label>
                         <br />
-                        <span style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;	color: #666;">e.g. "YHOO or YHOO GOOG" </span>
                         <h4>Buy/Sell:</h4>
                         &nbsp;Portfolio:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ticker:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Quantity:<br />&nbsp;
                         <asp:DropDownList ID="portfolioSelection" runat="server" DataSourceID="portfolioSelectSource" DataTextField="Portfolio" DataValueField="Portfolio">
@@ -432,8 +499,13 @@
         .auto-style2 {
             width: 593px;
         }
-        .auto-style3 {
-            width: 429px;
+        .auto-style4 {
+            width: 100%;
+            border-style: solid;
+            border-width: 1px;
         }
-    </style>
+        .auto-style3 {
+            width: 105px;
+        }
+        </style>
     </asp:Content>
